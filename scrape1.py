@@ -61,6 +61,8 @@ def get_review_count(soup):
 
     return review_count
 
+
+
 # Function to extract Availability Status
 def get_availability(soup):
     try:
@@ -87,7 +89,6 @@ if __name__ == '__main__':
 
     # Fetch links as List of Tag Objects
     links = soup.find_all("a", attrs={'class':'a-link-normal s-no-outline'})
-
     # Store the links
     links_list = []
 
@@ -109,8 +110,6 @@ if __name__ == '__main__':
         d['rating'].append(get_rating(new_soup))
         d['reviews'].append(get_review_count(new_soup))
         d['availability'].append(get_availability(new_soup))
-
-    
     amazon_df = pd.DataFrame.from_dict(d)
     amazon_df['title'].replace('', np.nan, inplace=True)
     amazon_df = amazon_df.dropna(subset=['title'])
